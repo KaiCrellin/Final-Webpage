@@ -52,7 +52,7 @@
 <?php
 session_start();
 $csrf_token = bin2hex(random_bytes(32));
-$_SESSION['crsf_token'] = $crsf_token;
+$_SESSION['csrf_token'] = $csrf_token;
 ?>
 
     <form action="../config/login.php" method="POST">
@@ -63,7 +63,7 @@ $_SESSION['crsf_token'] = $crsf_token;
         <label for="password">Password</label>
         <input type="text" name="password" placeholder="Please enter your username" required>
         <br>
-        <p><a href="request_forgotpass.php">Forgot Password?</a></p>
+        <p><a href="request_pass.php">Forgot Password?</a></p>
         <button type="submit">Login</button>
     </form>
 

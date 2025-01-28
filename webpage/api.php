@@ -23,58 +23,79 @@ if ($apikey !== $validapikey) {
     exit();
 }
 
-echo json_encode(['message' => "API key validated, proceed with request"]);
+switch($method) {
+    case 'GET':
+        if(isset($request[0]) && $request[0] === 'students') {
+            getStudents();
+        } else {
+            http_response_code(400);
+            echo  json_encode(['message' => 'Invalid GET request']);
+        }
+        break;
+    case 'POST':
+        if(isset($request[0]) && $request[0] === 'students') {
+            createStudents();
+        } else {
+            http_response_code(400);
+            echo json_encode(['message' => 'Invalid POST request']);
+        }
+        break;
+    case 'PUT':
+        if(isset($request[0]) && $request[0] === 'students') {
+            // function update student
+        } else {
+            http_response_code(400);
+            echo json_encode(['message]' => 'Invalid PUT request']);
+        }
+        break;
+    case 'PATCH':
+        if (isset($request[0]) && $request[0] === 'students') {
+            // function patch student 
+        } else {
+            http_response_code(400);
+            echo json_encode(['message]' => 'Invalio PATCH request']);
+        }
+        break;
+    case 'DELETE':
+        if(isset($request[0]) && $request[0] === 'students') {
+            //function delete students
+        } else {
+            http_response_code(400);
+            echo json_encode(['message' => 'Invalid DELETE request']);
+        }
+        break;
+    default:
+        http_response_code(405);
+        echo json_encode(['message' => 'Method Not Allowed']);
+        break;
+}
 
-/*
-
-ALL logic can be handled here e.g requesting to change password, removing a student from a course,
-adding a student to the course, uploading or downloading a file through href, login, logout, redirecting to
-certain pages depending on role in database.
-
-*/
-
-/* 
-
-define methods (GET,POST,PUT,PATCH,DELETE) to call functions e.g case 'GET': if(isset($request[0]) && $request[0] === 'students') {getStudents();}
-disregard "FUNCTION" not needed for code. just to show where to call the function. 
-
-*/
-
-/*
-
-at end of method if else method is invalid use http_response_code(400) and echo json_encode(['message' =>' to return
-error messages
-if else method is valid use http_response_code(201) and echo json_encode(['message' =>']) to return success
-messages.
-use "break:" to end the method and then "case" to create a new one 
-
-*/ 
-
-
-/*  
-
-create functions to access the database (use PDO to prevent SQL injection and http_response_code to return status code)
-e.g 
 function getStudents() {
     global $pdo;
     $stmt = $pdo->query("SELECT * FROM students");
-    $students = $stmt->fetchAll();
-    echo json_encode($students);
+    $students = $stmt->fetchALL();
+    echo  json_encode($students);
+
 }
 
-OR
-function createStudent() {
+function createStudents() {
     global $pdo;
     $data = json_decode(file_get_contents("php://input"), true);
-    $stmt = $pdo->prepare("INSERT INTO students (name, email, password) VALUES (?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO students (name, email,password) VALUES (?,?,?)");
     if ($stmt->execute([$data['name'], $data['email'], $data['password']])) {
         http_response_code(201);
-        echo json_encode(["message" => "Student created successfully"]);
-    } else {
+        echo json_encode(['message' => 'Student Created Successfully']);
+    }else {
         http_response_code(400);
-        echo json_encode(["message" => "Error creating student"]);
+        echo json_encode(['message' => 'Error creating student']);
     }
 }
 
+/*
+
+Logic pertaining to students can be changed here. Further implementation could possibly
+encorperate downloading, uploading or appending information withina  specific course depending 
+on role premissions
 */
+
 ?>

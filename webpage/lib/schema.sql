@@ -16,13 +16,12 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 
 CREATE TABLE IF NOT EXISTS tutors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS courses (
@@ -30,23 +29,25 @@ CREATE TABLE IF NOT EXISTS courses (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     tutor_id INT,
-    FOREIGN KEY (tutor_id) REFERENCES tutors(id)
+    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS students_courses (
     student_id INT,
     course_id INT,
     PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES students(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE ,
+    FOREIGN KEY (course_id) REFERENCES courses(id) 
 );
 
 CREATE TABLE IF NOT EXISTS password_resets (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    email VARCHAR(100),
     token VARCHAR(64) NOT NULL,
     expires INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ,
+    FOREIGN KEY (email) REFERENCES users(email) 
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     token VARCHAR(64) NOT NULL,
     expires INT NOT NULL,
     last_activity INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) 
 );
 
 -- Inserting example user values to use in code
