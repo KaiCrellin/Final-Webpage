@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    role ENUM('student', 'tutor', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_logged_in TIMESTAMP
 );
@@ -17,11 +16,18 @@ CREATE TABLE IF NOT EXISTS students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
 CREATE TABLE IF NOT EXISTS tutors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+);
+
+CREATE TABLE IF NOT EXISTS admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 );
 
 CREATE TABLE IF NOT EXISTS courses (

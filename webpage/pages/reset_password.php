@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newpassword = $_POST['new_password'] ?? '';
     $confirmpassword = $_POST['confirm_password'] ?? '';
 
-    if(empty($newpassword) || empty($confirmpassword)) {
+    if(empty($newpassword) || empty($confirmpassword)) { 
         echo 'Please Fill in all fields';
     } elseif ($newpassword !== $confirmpassword) {
         echo 'Password do not match';
