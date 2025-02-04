@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM password_resets WHERE token = :token");
         $stmt->execute(['token' => $token]);
 
-        echo 'password has been reset successfully';
+        echo  'password has been reset successfully';
         exit();
     }
 } 

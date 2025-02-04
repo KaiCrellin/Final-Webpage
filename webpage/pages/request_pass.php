@@ -10,10 +10,52 @@ $_SESSION['csrf_token'] = $csrf_token;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Ariel, sans serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd ;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <form action="../config/forgotten_pass.php" method="POST">
-        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token;?>">]
+        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token;?>">
         <label for="email">Email</label>
         <input type="email" name="email" placeholder="Please enter your email" required>
         <br>

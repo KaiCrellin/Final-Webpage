@@ -1,10 +1,10 @@
-//This file conntaines the connection to the database and PDO Exception handling
+
 <?php
-require_once 'config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 
 try {
-    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME .  ";port=" . DB_PORT ;
 
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -15,6 +15,6 @@ try {
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['message' => "Database connection failed" . $e->getMessage()]);
-    exit;
-}
+    exit();
+} 
 ?>

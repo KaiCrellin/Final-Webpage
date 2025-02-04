@@ -1,53 +1,74 @@
-// Purpose: Logic for logging in a user. can be moved to "api.php" later to configure handling of requests
-// and responses to the database
-
 <?php
 session_start();
+require_once __DIR__ . '/../lib/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        http_response_code(403);
-        echo "Invalid CSRF Token";
-        exit();
+        die('CSRF token validation failed');
     }
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    try {
-        $pdo = new PDO('mysql:host=localhost;dbname=my_database', 'root', '');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if (empty($email) || empty($password)) {
+        $error = 'Email and password are required.';
+        header('Location: ../pages/showlogin.php?error=' . urlencode($error));
+        exit;
+    } else {
+        try {
+            $stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = :email");
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare('SELECT id, name, password, role FROM users WHERE email = :email');
-        $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch();
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
 
-        if ($user && password_verify($password, $user['password'])) {
-            session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['role'] = $user['role'];
+               
+                $user_id = $user['id'];
 
-            if ($user['role'] == 'admin') {
-                header('Location: ../pages/admin_dashboard.php');
-            } elseif ($user['role'] == 'tutor') {
-                header('Location: ../pages/tutor_dashboard.php');
+                
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE user_id = :user_id");
+                $stmt->execute(['user_id' => $user_id]);
+                if ($stmt->fetchColumn() > 0) {
+                    $_SESSION['role'] = 'admin';
+                    header('Location: ../pages//admin_dashboard.php');
+                    exit;
+                }
+
+                
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM tutors WHERE user_id = :user_id");
+                $stmt->execute(['user_id' => $user_id]);
+                if ($stmt->fetchColumn() > 0) {
+                    $_SESSION['role'] = 'tutor';
+                    header('Location: ../pages/tutor_dashboard.php');
+                    exit;
+                }
+
+                
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM students WHERE user_id = :user_id");
+                $stmt->execute(['user_id' => $user_id]);
+                if ($stmt->fetchColumn() > 0) {
+                    $_SESSION['role'] = 'student';
+                    header('Location: ../pages/student_dashboard.php');
+                    exit;
+                }
+
+                $error = 'Invalid user role.';
+                header('Location: ../pages/showlogin.php?error=' . urlencode($error));
+                exit;
             } else {
-                header('Location: ../pages/student_dashboard.php');
+                $error = 'Invalid email or password.';
+                header('Location: ../pages/showlogin.php?error=' . urlencode($error));
+                exit;
             }
-            exit();
-        } else {
-            $error = "Invalid email or password";
+        } catch (PDOException $e) {
+            $error = 'Database error: ' . $e->getMessage();
             header('Location: ../pages/showlogin.php?error=' . urlencode($error));
-            exit();
+            exit;
         }
-    } catch (PDOException $e) {
-        echo 'Database error: ' . $e->getMessage();
-        exit();
     }
 } else {
-    http_response_code(405);
-    header('Location: ../pages/login.php');
-    exit();
+    header('Location: ../pages/showlogin.php');
+    exit;
 }
 ?>
