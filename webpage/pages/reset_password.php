@@ -1,4 +1,3 @@
-//Purpose: reset password page for users to reset their password.
 <?php
 require_once '../lib/db.php';
 

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-
+<?php include '../components/header.php'; ?>
 
 <main>
     <section>

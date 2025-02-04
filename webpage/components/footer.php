@@ -1,39 +1,44 @@
 <style>
     footer {
+        background-color: #f4f4f4;
+        color: black;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
         width: 100%;
-        color: #fff;
-        padding: 10 10;
     }
-    footer p {
-        text-align: center;
-    }
-    footer nav {
-        text-align: center;
 
+    footer p {
+        margin: 0;
     }
-    footer nav ul {
+
+    footer ul {
+        list-style-type: none;
         padding: 0;
     }
-    footer nav ul li {
+
+    footer ul li {
         display: inline;
-        margin-right: 10px;
+        margin: 0 1rem;
     }
-    footer nav ul li a {
+
+    footer a {
         color: black;
         text-decoration: none;
-        text-transform: uppercase;
     }
-    footer nav ul li a:hover {
-        text-decoration: underline;
+
+    footer a:hover {
+        color: darkred;
     }
 </style>
 
+
 <footer>
     <p>&copy; 2025 Ace Training</p>
-    <nav>
-        <ul>
-            <li><a href="privacy">Privacy Policy</a></li>
-            <li><a href="terms">Terms of Service</a></li>
-        </ul>
-    </nav>
+    <p>Website by Kai Crellin</p>
+    <ul>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#terms">Terms of Service</a></li>
+    </ul>
 </footer>

@@ -2,10 +2,12 @@
 session_start();
 require_once __DIR__ . '/../lib/db.php';
 
-$csrf_token = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $csrf_token;
-?>
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
+}
+$csrf_token = $_SESSION['csrf_token'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,12 @@ $_SESSION['csrf_token'] = $csrf_token;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
+        #home {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 20px;
+            color: black;
+        }
         body {
             background: whitesmoke;
 
@@ -24,7 +32,7 @@ $_SESSION['csrf_token'] = $csrf_token;
             padding: 20px;
             width: 300px;
             margin: 0 auto;
-            margin-top: 75px;
+            margin-top: 5px;
         }
         label {
             text-size-adjust: 100%;
@@ -55,6 +63,15 @@ $_SESSION['csrf_token'] = $csrf_token;
         button:hover {
             background-color: #0056b3;
         }
+        #information  {
+            text-align: center;
+            margin-top: 20px;
+            color: black;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
        
     </style>
     <script>
@@ -70,16 +87,8 @@ $_SESSION['csrf_token'] = $csrf_token;
     </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/../webpage/index.php">Home</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <form action="../config/login.php" method="POST">
+    <?php include '../components/header.php'; ?>
+    <form action="/webpage/config/login.php" method="POST">
         <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" placeholder="Please enter your Email" required>
@@ -96,8 +105,9 @@ $_SESSION['csrf_token'] = $csrf_token;
 
     <?php if (isset($_GET['error'])) echo "<p style='color:red;'>". htmlspecialchars($_GET['error']) ."</p>"; ?>
 
-    <h2>All Users . Just enter normal example pass if testing as hashed passwords are dispalyed</h2>
-    <table border="1">
+    <h2 id="information">All Users . Just enter normal example "pass" for alice@example.com
+        or check for users data in DB. hashed passowrd are displayed for debugging purposes.</h2>
+    <table border="1" id="information">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -120,5 +130,6 @@ $_SESSION['csrf_token'] = $csrf_token;
         }
         ?>
     </table>
+    <?php include '../components/footer.php'; ?>
 </body>
 </html>

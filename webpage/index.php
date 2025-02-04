@@ -3,43 +3,27 @@ include 'components/header.php';
 
 ?>
 <style>
-    * {
-        overflow-x: hidden;
-        color:black;
-        background-color: #f4f4f4;
-        
+    main {
+        margin: 0 auto;
+        width: 80%;
     }
-    .logo
-    {
-        left: 0;
-        height: 20rem;
-    }
-    .logo nav {
-        text-transform: uppercase;
-        display: inline;
-        margin-left: 4rem;
 
-    }
-    .logo nav ul {
-        padding: 0;
-        justify-items: ;
-    }
     #home {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 28rem;
-        font-family:Arial, Helvetica, sans-serif;
-        
+        text-align: center;
+        margin-top: 2rem;
     }
     #home h1 {
-        align-content: left;
-        margin-bottom: 10rem;
-        
+        margin: 1rem;
+        transform: uppercase;
     }
     #home p {
-        font-size: 20px;
+        margin-top: 10rem;
+        align-items: right;
+    }
 
+    #information {
+        text-align: center;
+        margin-top: 16rem;
     }
 </style>
 
@@ -47,6 +31,7 @@ include 'components/header.php';
     <section id="home">
         <h1>Welcome to Our Website, Ace Training</h1>
         <p>Click Log in to begin.</p>
+        <p>can use sections  to add information here</p>
     </section>
     <section id="information">
         <h2>Information about the website</h2>
