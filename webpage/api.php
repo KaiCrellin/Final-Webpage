@@ -1,4 +1,3 @@
-// Purpose: API environment for handling request and responses to and from the database.
 <?php
 header("Content-type: application/json");
 
@@ -86,7 +85,7 @@ function createStudents() {
     if ($stmt->execute([$data['name'], $data['email'], $data['password']])) {
         http_response_code(201);
         echo json_encode(['message' => 'Student Created Successfully']);
-    }else {
+    } else {
         http_response_code(400);
         echo json_encode(['message' => 'Error creating student']);
     }
@@ -97,6 +96,9 @@ function createStudents() {
 Logic pertaining to students can be changed here. Further implementation could possibly
 encorperate downloading, uploading or appending information withina  specific course depending 
 on role premissions
+
+can be introduced into tutor, student, admin dashboard for updating all information for courses.
+e.g assignments, deadlines, course resources. 
 */
 
 ?>

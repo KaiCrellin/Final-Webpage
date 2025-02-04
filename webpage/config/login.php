@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($email) || empty($password)) {
         $error = 'Email and password are required.';
-        header('Location: ../pages/showlogin.php?error=' . urlencode($error));
-        exit;
+        header('Location: /webpage/pages/showlogin.php?error=' . urlencode($error));
+        exit();
     } else {
         try {
             $stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = :email");
@@ -22,53 +22,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
-
-               
                 $user_id = $user['id'];
+
+
+                $role = '';
 
                 
                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE user_id = :user_id");
                 $stmt->execute(['user_id' => $user_id]);
                 if ($stmt->fetchColumn() > 0) {
-                    $_SESSION['role'] = 'admin';
-                    header('Location: ../pages//admin_dashboard.php');
-                    exit;
+                    $role = 'admin';
+                    
                 }
 
-                
+               
                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM tutors WHERE user_id = :user_id");
                 $stmt->execute(['user_id' => $user_id]);
                 if ($stmt->fetchColumn() > 0) {
-                    $_SESSION['role'] = 'tutor';
-                    header('Location: ../pages/tutor_dashboard.php');
-                    exit;
+                    $role = 'tutor';
+                   
                 }
 
-                
+                // Check if user is a student
                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM students WHERE user_id = :user_id");
                 $stmt->execute(['user_id' => $user_id]);
                 if ($stmt->fetchColumn() > 0) {
-                    $_SESSION['role'] = 'student';
-                    header('Location: ../pages/student_dashboard.php');
-                    exit;
+                    $role = 'student';
+                    
                 }
 
+                if ($role) {
+                    $_SESSION['role'] = $role;
+
+                    if ($role === 'admin') {
+                        header('Location: /webpage/pages/admin_dashboard.php');
+                        exit();
+                    } elseif ($role === 'tutor') {
+                        header('Location: /webpage/pages/tutor_dashboard.php');
+                        exit();
+                    } elseif ($role === 'student') {
+                        header('Location: /webpage/pages/student_dashboard.php');
+                        exit();
+                    }
+                } else {
                 $error = 'Invalid user role.';
-                header('Location: ../pages/showlogin.php?error=' . urlencode($error));
-                exit;
+                header('Location: /webpage/pages/showlogin.php?error=' . urlencode($error));
+                exit();
+            }
             } else {
                 $error = 'Invalid email or password.';
-                header('Location: ../pages/showlogin.php?error=' . urlencode($error));
-                exit;
+                header('Location: /webpage/pages/showlogin.php?error=' . urlencode($error));
+                exit();
             }
         } catch (PDOException $e) {
             $error = 'Database error: ' . $e->getMessage();
-            header('Location: ../pages/showlogin.php?error=' . urlencode($error));
-            exit;
+            header('Location: /webpage/pages/showlogin.php?error=' . urlencode($error));
+            exit();
         }
     }
 } else {
-    header('Location: ../pages/showlogin.php');
-    exit;
+    header('Location: /webpage/pages/showlogin.php');
+    exit();
 }
 ?>
