@@ -1,5 +1,3 @@
-/* Purpose: Logic for logging out a user. can be moved to "api.php" later to configure handling of requests
-and responses to the database */ 
 <?php
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Invalid CSRF Token";
         exit();
     }
+} else {
+    echo "invalid request method";
 }
+echo "Logging Out...";
 
 $_SESSION = array();
 session_destroy();
