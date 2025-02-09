@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                    
                 }
 
-                // Check if user is a student
+                
                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM students WHERE user_id = :user_id");
                 $stmt->execute(['user_id' => $user_id]);
                 if ($stmt->fetchColumn() > 0) {

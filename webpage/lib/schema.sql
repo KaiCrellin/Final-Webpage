@@ -67,10 +67,10 @@ CREATE TABLE IF NOT EXISTS sessions (
 -- Inserting example user values to use in code
 INSERT INTO users (name, email, password) VALUES
 ('Alice', 'alice@example.com', 'pass'),
-('Bob', 'bob@example.com', 'password2'),
-('Charlie', 'charlie@example.com', 'password3'),
-('David', 'david@example.com', 'password4'),
-('Eve', 'eve@example.com', 'password5');
+('Bob', 'bob@example.com', 'pass'),
+('Charlie', 'charlie@example.com', 'pass'),
+('David', 'david@example.com', 'pass'),
+('Eve', 'eve@example.com', 'pass');
 
 -- Inserting example tutor values to use in code
 INSERT INTO tutors (user_id) VALUES

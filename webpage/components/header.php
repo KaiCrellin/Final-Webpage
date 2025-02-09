@@ -3,59 +3,61 @@ session_start();
 ?>
 
 <style>
-       .nav {
-        color: black;
-    }
-    .logo {
-        font-size: 2rem;
-        color: black;
-        margin-left: 4rem;
-        left: 0;
-        overflow-x: hidden;
-        background-color: #f4f4f4;
-    }
-    .logo {
-        text-transform: uppercase;
-        display: inline;
-        margin-left: 4rem;
-    }
-    nav {
+    header {
+        background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
+        color: white;
+        padding: 1rem;
         display: flex;
-        align-items: center;
-        text-transform: uppercase;
-        margin-left: 4rem;
         justify-content: space-between;
-        float: right;
+        align-items: center;
+        
     }
+    .logo a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+
     .nav ul {
         display: flex;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
+        list-style: none;
     }
-    .nav li {
-        margin: 0 1rem;
+
+    .nav ul li {
+        margin-right: 1rem;
     }
-    .logout-button {
-        color: white;
-        background-color: red;
-        padding: 10px 15px;
-        text-align: right;
+
+    .nav ul li a {
         text-decoration: none;
-        text-transform: uppercase;
-        display: inline-block;
+        color: white;
+        
+    }
+
+    .nav ul li a:hover {
+        color: lightgray;
+    }
+
+    .logout-button {
+        background-color: blue;
+        border: none;
+        color: white;
         cursor: pointer;
+        text-transform: uppercase;
     }
+
     .logout-button:hover {
-        background-color: darkred;
+        color: lightblue;
     }
+   
+   
+    
 </style>
 
 <header>
     <div class="logo"><a href="/webpage">Ace Training</a></div>
     <nav class="nav">
         <ul>
-            <li><a href="/webpage/pages/aboutus.php">About Us</a></li>
+            <li class="input" id="input"><a href="/webpage/pages/aboutus.php">About us</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <?php
                 if (!isset($_SESSION['csrf_token'])) {
@@ -74,9 +76,10 @@ session_start();
                 }
                 ?>
                 <?php if ($dashboard_url): ?>
-                    <li><a href="<?php echo $dashboard_url; ?>">Dashboard</a></li>
+                    <li class="input" id="input"><a href="<?php echo $dashboard_url; ?>">Dashboard</a></li>
                 <?php endif; ?>
                 <li><a href="/webpage/config/profile.php">Profile</a></li>
+                <li><a href="/webpage/config/timetable.php">Timetable</a></li>
                 <li>
                     <form id="logout_form" action="/webpage/config/logout.php" method="POST">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">

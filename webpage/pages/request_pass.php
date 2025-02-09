@@ -10,6 +10,9 @@ $_SESSION['csrf_token'] = $csrf_token;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        html {
+            background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
+        }
         body {
             font-family: Ariel, sans serif;
             margin: 20px;
