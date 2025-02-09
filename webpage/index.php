@@ -3,6 +3,19 @@ include 'components/header.php';
 
 ?>
 <style>
+    html {
+        background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
+        overflow-x: hidden;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }   
+    
     main {
         margin: 0 auto;
         width: 80%;
@@ -24,6 +37,7 @@ include 'components/header.php';
     #information {
         text-align: center;
         margin-top: 16rem;
+        height: 60vh;
     }
 </style>
 
@@ -42,7 +56,9 @@ include 'components/header.php';
             while having certain privliges the student wont.
         </p1>
     </section>
+
 </main>
+
 
 
 

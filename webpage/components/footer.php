@@ -1,16 +1,16 @@
 <style>
     footer {
-        background-color: #f4f4f4;
-        color: black;
-        text-align: center;
+        background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
+        color: white;
         padding: 1rem;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     footer p {
         margin: 0;
+        font-size: 1.2rem;
     }
 
     footer ul {
@@ -19,8 +19,13 @@
     }
 
     footer ul li {
-        display: inline;
+        display: flex;
         margin: 0 1rem;
+    }
+    footer ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
     }
 
     footer a {
