@@ -2,6 +2,9 @@
 session_start();
 require_once __DIR__ . '/../lib/db.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -157,7 +160,6 @@ $user_id = $_SESSION['user_id'] ?? null;
                 echo "<td>" . htmlspecialchars($row['id']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['password']) . "</td>";
                 echo "<td>" . htmlspecialchars($role) . "</td>";
                 echo "</tr>";
             }
