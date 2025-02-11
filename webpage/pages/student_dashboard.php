@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Dashboard</title>
     <style>
         html {
             background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
@@ -40,6 +40,6 @@
 </main>
     
 
-    
+<script src="/webpage/assets/js/main.js"></script>
 </body>
 </html>

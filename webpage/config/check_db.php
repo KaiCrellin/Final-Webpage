@@ -7,11 +7,13 @@ try {
     echo "Database connection successful.<br>";
 
     // List of required tables
-    $requiredTables = ['users', 'students', 'tutors', 'admins', 'courses', 'students_courses'];
+    $requiredTables = ['users', 'students', 'tutors', 'admins', 'courses', 'students_courses'
+        , 'calendar', 'students_courses', 'students_courses', 'students_courses'
+];
 
     // Check if required tables exist
     foreach ($requiredTables as $table) {
-        $stmt = $pdo->query("SHOW TABLES LIKE '$table'");
+        $stmt = $pdo->query("SHOW TABLES LIKE '$table' ");
         if ($stmt->rowCount() == 0) {
             echo "Table '$table' does not exist.<br>";
         } else {

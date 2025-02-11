@@ -95,4 +95,5 @@ function sendResetEmail($email,$resetToken) {
         echo 'Database Error:' . $e->getMessage();
     }
 }
+
 ?>
