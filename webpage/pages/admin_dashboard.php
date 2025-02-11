@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width
     , initial-scale=1.0">
-    <title>Document</title>
+    <title>Administrator</title>
     <style>
         html {
             background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
@@ -24,7 +24,7 @@
             height: 100vh;
             color: white;
         }
-        h1 {
+        .Welcome {
             font-size: 3rem;
         }
     </style>
@@ -34,7 +34,7 @@
 
 <main>
     <section>
-        <p><h1>Welcome to Admin Dashboard</h1></p>
+        <p><h1 class="Welcome">Welcome to Admin Dashboard</h1></p>
     </section>
 </main>
     

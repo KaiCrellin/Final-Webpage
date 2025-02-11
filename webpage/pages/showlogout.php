@@ -11,41 +11,13 @@ $_SESSION['csrf_token'] = $csrf_token;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        html {
-            background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
-        }
-        button {
-        color: white;
-        background-color: red;
-        padding: 10px 15px;
-        text-align: right;
-        text-decoration: none;
-        text-transform: uppercase;
-        display: inline-block;
-        cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById('password');
-            var toggleCheckbox = document.getElementById('togglePassword');
-            if (toggleCheckbox.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
-    </script>
+    <title>Tutor Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
 </head>
 <body>
 <?php include __DIR__ . '/../components/header.php'; ?>
 
     <?php if (isset($_GET['error'])) echo "<p style='color:red;'>". htmlspecialchars($_GET['error']) ."</p>"; ?>
-
+    <script src="/webpage/assets/js/main.js"></script>
 </body>
 </html>

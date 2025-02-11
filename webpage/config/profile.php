@@ -61,76 +61,51 @@ if ($user) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Profile</title>
+    <link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
     <style>
-        html {
-            background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
-        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             justify-content: center;
             align-items: center;
-        }
-        .table {
-            
-            border-collapse: collapse;
-            width: 100%;
-            display: flex;
-            justify-content: center;
 
         }
-        tbody {   
-            
-        }
-        tr {
-            border-bottom: 1px solid #ddd;
-            
-        }
-        th, td {;
-            padding: 8px;
-            background: whitesmoke;
-            background-clip: padding-box;
-        }
-        .head {
-            text-align: center;
-            text-transform: uppercase;
-            padding: 10px;
-        }
-
 
     </style>
 </head>
 <body>
-    <div class="head">
+    <div class="head-container">
         <h1>Welcome to Your Profile</h1>
         <p>Here you can view your profile information</p>
     </div>
-    <div class="container" >
-        <table class="table" >
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td><?php echo htmlspecialchars($user['name']); ?></td>
+    <div class="profile-container" >
+        <table class="profile-table">
+            <tbody class="table-body">
+                <tr = class="table-row">
+                    <th class="table-head">Name</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['name']); ?></td>
                 </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><?php echo htmlspecialchars($user['email']); ?></td>
+                <tr class="table-row">
+                    <th class="table-head">Email</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['email']); ?></td>
                 </tr>
-                <tr>
-                    <th>Role</th>
-                    <td><?php echo htmlspecialchars($user['role']); ?></td>
+                <tr class="table-row">
+                    <th class="table-head">Role</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['role']); ?></td>
                 </tr>
+                <tr class="table-row">
+                    <th class="table-head">Coures Enrolled or Teaching</th>
+                    <td class="table-data"><?php echo htmlspecialchars($courses); ?></td>
+                </tr class="table-row">
                 <tr>
-                    <th>Coures Enrolled or Teaching</th>
-                    <td><?php echo htmlspecialchars($courses); ?></td>
-                </tr>
-                <tr>
-                    <th>Account Created</th>
-                    <td><?php echo htmlspecialchars($user['created_at']); ?></td>
+                    <th class="table-head">Account Created</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['created_at']); ?></td>
                 </tr>
             </tbody>
         </table>  
     </div>
+
 </body>
 </html>
+<?php include '../components/footer.php'; ?>

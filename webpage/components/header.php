@@ -1,105 +1,86 @@
+<?php session_start();
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf_token = $_SESSION['csrf_token'];
+?>
 
+<link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
 <style>
-    header {
-        background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
-        color: white;
-        padding: 1rem;
+    .main-nav {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        
-    }
-    .logo a {
+        padding: 1rem 0;
+        background: black;
         color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
     }
 
-    .nav ul {
+    .header-content {
         display: flex;
-        list-style: none;
+        align-items: center;
+        width: 100%;
+        margin-left: 10px;
     }
 
-    .nav ul li {
-        margin-right: 1rem;
-    }
-
-    .nav ul li a {
+    .home {
+        color: white;
         text-decoration: none;
+    }
+
+    .right-navigation {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+    }
+
+    .right-navigation a, .logout-button {
         color: white;
-        
-    }
-
-    .nav ul li a:hover {
-        color: lightgray;
-    }
-
-    .logout-button {
-        background-color: blue;
+        text-decoration: none;
+        background: none;
         border: none;
-        color: white;
         cursor: pointer;
-        text-transform: uppercase;
+        font-size: large;
+        margin-right: 5px;
     }
 
-    .logout-button:hover {
-        color: lightblue;
+    .right-navigation a:hover, .logout-button:hover {
+        text-decoration: underline;
     }
-   
-   
-    
 </style>
 
 <header>
-    <div class="logo"><a href="/webpage">Ace Training</a></div>
-    <nav class="nav">
-        <ul>
-            <li class="input" id="input"><a href="/webpage/pages/aboutus.php">About us</a></li>
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <?php
-                if (!isset($_SESSION['csrf_token'])) {
-                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-                }
-                $csrf_token = $_SESSION['csrf_token'];
-
-                $role = $_SESSION['role'] ?? '';
-                $dashboard_url = '';
-                if ($role === 'admin') {
-                    $dashboard_url = '/webpage/pages/admin_dashboard.php';
-                } elseif ($role === 'tutor') {
-                    $dashboard_url = '/webpage/pages/tutor_dashboard.php';
-                } elseif ($role === 'student') {
-                    $dashboard_url = '/webpage/pages/student_dashboard.php';
-                }
-                ?>
-                <?php if ($dashboard_url): ?>
-                    <li class="input" id="input"><a href="<?php echo $dashboard_url; ?>">Dashboard</a></li>
-                <?php endif; ?>
-                <li><a href="/webpage/config/profile.php">Profile</a></li>
-                <li><a href="/webpage/config/timetable.php">Timetable</a></li>
-                <li>
-                    <form id="logout_form" action="/webpage/config/logout.php" method="POST">
+    <nav class="main-nav">
+        <div class="header-content">
+            <h1><a href="/webpage" class="home">Ace Training</a></h1>
+            <div class="right-navigation">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php
+                    $role = $_SESSION['role'] ?? '';
+                    $dashboard_url = '';
+                    if ($role === 'admin') {
+                        $dashboard_url = '/webpage/pages/admin_dashboard.php';
+                    } elseif ($role === 'tutor') {
+                        $dashboard_url = '/webpage/pages/tutor_dashboard.php';
+                    } elseif ($role === 'student') {
+                        $dashboard_url = '/webpage/pages/student_dashboard.php';
+                    }
+                    ?>
+                    <?php if ($dashboard_url): ?>
+                        <a href="<?php echo $dashboard_url; ?>">Dashboard</a>
+                    <?php endif; ?>
+                    <a href="/webpage/config/profile.php">Profile</a>
+                    <a href="/webpage/config/timetable.php">Timetable</a>
+                    <a href="/webpage/config/assignments.php">Assignments</a>
+                    <form id="logout_form" action="/webpage/config/logout.php" method="POST" style="display: inline;">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <button type="submit" class="logout-button" id="logout-button">Logout</button>
                     </form>
-                </li>
-            <?php else: ?>
-                <li><a href="/webpage/pages/showlogin.php">Log In</a></li>
-            <?php endif; ?>
-        </ul>
+                <?php else: ?>
+                    <a href="/webpage/pages/showlogin.php" class="log-in">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
     </nav>
 </header>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const logoutButton = document.getElementById("logout-button");
-
-        if (logoutButton) {
-            logoutButton.addEventListener("click", function(event) {
-                if (!confirm("Are you sure you want to log out?")) {
-                    event.preventDefault();
-                }
-            });
-        }
-    });
-</script>
+<script src="/webpage/assets/js/main.js"></script>
