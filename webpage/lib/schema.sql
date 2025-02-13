@@ -1,3 +1,4 @@
+-- This file contains the SQL schema for the database
 CREATE DATABASE IF NOT EXISTS db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 USE db;

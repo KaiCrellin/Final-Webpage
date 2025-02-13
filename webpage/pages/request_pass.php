@@ -1,3 +1,4 @@
+<!--Purpose: Page for requesting a new password-->
 <?php 
 session_start();
 $csrf_token = bin2hex(random_bytes(32));

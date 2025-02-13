@@ -1,3 +1,4 @@
+<!--Purpose: Tutor Dashboard-->
 <?php
 session_start();
 include_once __DIR__ . '/../pages/showlogout.php';

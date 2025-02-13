@@ -1,3 +1,4 @@
+/*Purpose: Main java scripts*/
 function closeModel() {
     document.getElementById('assignmentmodel').style.display = 'none';
 };

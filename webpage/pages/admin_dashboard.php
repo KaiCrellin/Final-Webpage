@@ -1,3 +1,4 @@
+<!--Purpose: Admin Dashboard-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

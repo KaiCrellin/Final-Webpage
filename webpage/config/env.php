@@ -1,7 +1,8 @@
+<!--Purpose: Load environment files from .env -->
 <?php
 function  loadenv($filePath) {
     if (!file_exists($filePath)) {
-        throw new Exception("the .env file dopes not exist");
+        throw new Exception("the .env file does not exist");
     }
 
     $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

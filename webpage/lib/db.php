@@ -1,3 +1,4 @@
+<!--Purpose: Connection to the database, establishing PDO options for database manipulation-->
 <?php
 require_once __DIR__ . '/../config/config.php';
 

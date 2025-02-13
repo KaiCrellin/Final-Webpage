@@ -1,3 +1,4 @@
+<!--Purpose: Logic for forgotten password-->
 <?php
 session_start();
 

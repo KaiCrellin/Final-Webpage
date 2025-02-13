@@ -1,3 +1,4 @@
+<!--Purpose: Logic to logout a user-->
 <?php
 session_start();
 

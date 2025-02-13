@@ -1,3 +1,4 @@
+<!--Purpose: Page and logic for handling resetting password-->
 <?php
 require_once '../lib/db.php';
 

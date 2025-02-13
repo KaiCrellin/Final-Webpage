@@ -1,3 +1,4 @@
+<!--Purpose: Main HGome Page-->
 <?php
 include 'components/header.php';
 

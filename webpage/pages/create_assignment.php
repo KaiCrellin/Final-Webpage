@@ -1,3 +1,4 @@
+<!--Purpose: Logic to create new assignments and add files to assignment-->
 <?php
 session_start();
 include_once __DIR__ . '/../lib/db.php';
