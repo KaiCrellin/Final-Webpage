@@ -1,4 +1,4 @@
-
+<!--Purpose: Footer-->
 <link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
 <footer>
     <p>&copy; 2025 Ace Training</p>

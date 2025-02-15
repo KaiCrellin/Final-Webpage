@@ -1,3 +1,4 @@
+<!--Purpose: Profile page and logic-->
 <?php 
 session_start();
 include '../components/header.php';

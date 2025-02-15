@@ -1,3 +1,4 @@
+<!--Purpose: Page for requesting a new password-->
 <?php 
 session_start();
 $csrf_token = bin2hex(random_bytes(32));
@@ -19,40 +20,6 @@ $_SESSION['csrf_token'] = $csrf_token;
             padding: 0;
             background-color: #f9f9f9;
         }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd ;
-            border-radius: 5px;
-            max-width: 400px;
-            margin: auto;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
@@ -63,5 +30,19 @@ $_SESSION['csrf_token'] = $csrf_token;
         <br>
         <button type="submit"><a href="reset_password.php">Request Password reset</a></button>
 </form>
+
+
+
+<div class="forgotten_pass_container">
+    <div class="forgotten_form">
+        <form action="../config/forgotten_pass.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token;?>">
+            <label for="email" class="forgotten_email_label">Email</label>
+            <input type="email" name="email" class="forgotten_email_input" placeholder="Please enter your email" required>
+            <br>
+            <button type="submit" class="forgotten_button"><a href="reset_password.php">Request Password Reset</a></button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

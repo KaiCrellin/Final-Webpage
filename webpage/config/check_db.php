@@ -1,3 +1,4 @@
+<!--Purpose: logic to check if db connection succ and if tables created-->
 <?php
 require_once __DIR__ . '/../lib/db.php';
 

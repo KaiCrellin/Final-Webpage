@@ -1,4 +1,5 @@
-<div?php 
+<!--Purpose: Assignment Page and logic-->
+<?php 
 session_start();
 require_once __DIR__ . '/../lib/db.php';
 ?>

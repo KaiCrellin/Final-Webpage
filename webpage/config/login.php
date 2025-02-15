@@ -1,3 +1,4 @@
+<!--Purpose: Logic for handling log in-->
 <?php
 session_start();
 require_once __DIR__ . '/../lib/db.php';

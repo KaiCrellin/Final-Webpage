@@ -42,41 +42,33 @@ footer a {
 footer a:hover {
     color: darkred;
 }
-/* CSS for header.php*/
+/* CSS for header.php ==  to be filled working out issues with positioning
+on certain pages
+*/
 
 
 /*CSS for Index.php*/
-html {
-    background: linear-gradient(180deg, rgba(48, 47, 47, 0.61) 0%, rgba(19, 18, 18, 0.75) 50%);
-    overflow-x: hidden;
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-}   
 
-main {
+
+.main_home {
     margin: 0 auto;
     width: 80%;
 }
 
-.home {
+.home_container {
     text-align: center;
     margin-top: 2rem;
 }
-.home, h1 {
+.home_container, .main_home_heading {
     margin: 1rem;
     transform: uppercase;
 }
-.home, p {
+.home_container, .main_home_para {
     margin-top: 10rem;
     align-items: right;
 }
 
-.information {
+.home_main_information {
     text-align: center;
     margin-top: 16rem;
     height: 60vh;
@@ -239,5 +231,124 @@ main {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+/* CSS for tutordashboard.php */
+.tutor-dashboard-head {
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard_tutor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dash_tutor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+}
+
+.mobile_menu_courses {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mobile_menu_courses, .mobile_menu_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* CSS for studentdashboard.php */
+.main_admin {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 100vh;
+    color: white;
+}
+.main_student_heading {
+    font-size: 3rem;
+}
+/*CSS for admin_dashboard.php*/
+.main_admin {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 100vh;
+    color: white;
+}
+.Welcome {
+    font-size: 3rem;
+}
+/* CSS for reset_password.php */
+.new_password {
+    display: block;
+    margin-bottom: 8px;
+}
+.confirm_password {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.request_button {
+    padding: 10px 15px;
+    background: #007BFF;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.request_button:hover {
+    background: #0056b3;
+}
+/* CSS for request_pass.php*/
+.forgotten_form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd ;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: auto;
+}
+.forgotten_email_label{
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+.forgotten_email_input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.forgotten_button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.forgotten_button:hover {
+    background-color: #0056b3;
 }
 

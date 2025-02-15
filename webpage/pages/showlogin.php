@@ -1,3 +1,4 @@
+<!--Purpose: Page for login-->
 <?php
 require_once __DIR__ . '/../lib/db.php';
 

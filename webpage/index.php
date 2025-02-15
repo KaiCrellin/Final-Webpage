@@ -1,3 +1,4 @@
+<!--Purpose: Main HGome Page-->
 <?php
 include 'components/header.php';
 
@@ -12,14 +13,14 @@ if (isset($_SESSION['user_id'])) {
 ?>
 
 <link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
-<main>
-    <div class="home">
+<main class="main_home">
+    <div class="home_container">
         <section>
-            <h1>Welcome To Our Website, Ace Training</h1>
-            <p>Click Log in to begin</p>
+            <h1 class="main_home_heading">Welcome To Our Website, Ace Training</h1c>
+            <p class="main_home_para">Click Log in to begin</pc>
         </section>
     </div>
-    <div class="information">
+    <div class="main_home_information">
         <section>
             <h2>information about the website</h2>
             <p2> This website is a University Assignment, produced to handle

@@ -1,3 +1,4 @@
+<!--Purpose: Tutor Dashboard-->
 <?php
 session_start();
 include_once __DIR__ . '/../pages/showlogout.php';
@@ -11,45 +12,7 @@ require_once __DIR__ . '/../lib/db.php';
     <title>Tutor Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/webpage/assets/js/styles.css">
     <style>
-        .tutor-dashboard-head {
-            display: flex;
-            font-size: 1.5rem;
-            justify-content: center;
-            align-items: center;
-        }
-        .dashboard_tutor {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .dash_tutor {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 1rem;
-            padding: 1rem;
-            border: 1px solid black;
-            border-radius: 5px;
-            background-color: #f1f1f1;
-        }
-
-        .mobile_menu_courses {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .mobile_menu_courses, .mobile_menu_item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-            
+       
     </style>
 </head>
 

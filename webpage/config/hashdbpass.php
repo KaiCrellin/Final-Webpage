@@ -1,3 +1,4 @@
+<!--Purpose: Check -->
 <?php
 
 ini_set('display_errors', 1);
@@ -16,12 +17,12 @@ try {
         $user_id = $user['id'];
         $plain_password = $user['password'];
 
-        // Check if the password is already hashed
+        
         if (password_get_info($plain_password)['algo'] !== 0) {
-            // Hash the password
+            
             $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
 
-            // Update the password in the database
+            
             $update_stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :id");
             $update_stmt->execute(['password' => $hashed_password, 'id' => $user_id]);
 

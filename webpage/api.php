@@ -1,8 +1,9 @@
+<!--Purpose: Application Programming Interface; can be used for storing manipulation of students in respective courses  -->
 <?php
 header("Content-type: application/json");
 
-require_once 'lib/db.php';
-require_once 'config/env.php';
+require_once '../lib/db.php';
+require_once '../config/env.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $request = isset($_SERVER['PATH_INFO']) ? explode('/', trim($_SERVER['PATH_INFO'], '/')) : [];

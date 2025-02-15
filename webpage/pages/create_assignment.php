@@ -1,3 +1,4 @@
+<!--Purpose: Logic to create new assignments and add files to assignment-->
 <?php
 session_start();
 include_once __DIR__ . '/../lib/db.php';
@@ -20,16 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['assignment_file']) && $_FILES['assignment_file']['error'] === UPLOAD_ERR_OK) {
         $upload_dir = __DIR__ . '/../uploads/';
         $file_name = basename($_FILES['assignment_file']['name']);
-        $file_path = $upload_dir . $file_name;
+        $file_path = __DIR__ . $upload_dir . $file_name;
 
         if (!move_uploaded_file($_FILES['assignment_file']['tmp_name'], $file_path)) {
             $error = "File Upload Failed";
-            header('Location; /webpage/pages/tutor_dashboard.php?error=' . urlencode($error));
+            header('Location: /webpage/pages/tutor_dashboard.php?error=' . urlencode($error));
             exit();
 
         }
-
-        $file_path = '/uploads/' . $file_name;
     }
     try {
         global $pdo;

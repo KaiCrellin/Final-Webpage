@@ -1,3 +1,4 @@
+<!--Purpose: Header-->
 <?php session_start();
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -74,7 +75,7 @@ $csrf_token = $_SESSION['csrf_token'];
                     <a href="/webpage/config/assignments.php">Assignments</a>
                     <form id="logout_form" action="/webpage/config/logout.php" method="POST" style="display: inline;">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                        <button type="submit" class="logout-button" id="logout-button">Logout</button>
+                        <button type="submit" class="logout-button" id="logout-button" onclick="logoutButton()">Logout</button>
                     </form>
                 <?php else: ?>
                     <a href="/webpage/pages/showlogin.php" class="log-in">Log In</a>

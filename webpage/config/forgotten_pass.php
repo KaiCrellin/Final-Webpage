@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <!--Purpose: Logic for Sending Password reset email -->
 <?php
 session_start();
 
@@ -97,3 +107,6 @@ function sendResetEmail($email,$resetToken) {
 }
 
 ?>
+<script src="/../webpage/assets/js/main.js"></script>
+</body>
+</html>
