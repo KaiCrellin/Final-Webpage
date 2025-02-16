@@ -32,17 +32,6 @@ function getDashboardURL() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutButton = document.getElementById("logout-button");
-
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function (event) {
-            if (!confirm("Are you sure you want to log out?")) {
-                event.preventDefault();
-            }
-        });
-    }
-});
 
 
 function toggleDropdown() {
