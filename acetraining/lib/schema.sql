@@ -41,17 +41,29 @@ CREATE TABLE IF NOT EXISTS courses (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     tutor_id INT NOT NULL,
-    COURSE_id INT NOT NULL,
+    student_id INT NOT NULL,
     FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE,
-    FOREIGN KEY (COURSE_id) REFERENCES courses(id) ON DELETE CASCADE
-  
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
+
+    -- Table for course_enrollments
+CREATE TABLE IF NOT EXISTS course_enrollments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id INT NOT NULL,
+    student_id INT NOT NULL,
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+);
+
+
 
 -- Table for classes
 CREATE TABLE IF NOT EXISTS classes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     tutor_id INT NOT NULL,
+    student_id INT NOT NULL,
     class_name VARCHAR(100) NOT NULL,
     class_description TEXT,
     class_date TIMESTAMP,
@@ -60,17 +72,10 @@ CREATE TABLE IF NOT EXISTS classes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE
+    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
--- Table for students and courses relationship
-CREATE TABLE IF NOT EXISTS students_courses (
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
-);
 
 -- Table for password resets
 CREATE TABLE IF NOT EXISTS password_resets (
@@ -79,7 +84,9 @@ CREATE TABLE IF NOT EXISTS password_resets (
     email VARCHAR(100),
     token VARCHAR(64) NOT NULL,
     expire INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    index (token)
 );
 
 -- Table for sessions
@@ -96,11 +103,15 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE TABLE IF NOT EXISTS assignments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
+    tutor_id INT NOT NULL,
+    student_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     description TEXT,
     due_date TIMESTAMP,
     file_path VARCHAR(255),
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
 -- Table for holding quiz information
@@ -108,6 +119,7 @@ CREATE TABLE IF NOT EXISTS quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     tutor_id INT NOT NULL,
+    student_id INT NOT NULL,
     quiz_name VARCHAR(100) NOT NULL,
     quiz_description TEXT,
     quiz_questions_number TEXT,
@@ -118,7 +130,8 @@ CREATE TABLE IF NOT EXISTS quizzes (
     quiz_time TIME,
     duration INT,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE
+    FOREIGN KEY (tutor_id) REFERENCES tutors(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
 -- Table for submissions
@@ -169,7 +182,7 @@ INSERT INTO users (name, email, password) VALUES
 ('Bob', 'bob@example.com', 'pass'),
 ('Charlie', 'charlie@example.com', 'pass'),
 ('David', 'david@example.com', 'pass'),
-('Kai', '22004140@hope.ac.uk', 'pass');
+('Kai', 'kaicrellin1244@gmail.com', 'pass');
 
 -- Inserting example tutor values to use in code
 INSERT INTO tutors (user_id) VALUES
@@ -186,14 +199,19 @@ INSERT INTO admins (user_id) VALUES
 (5);
 
 -- Inserting example course values to use in code
-INSERT INTO courses (name, description, tutor_id, COURSE_id) VALUES
+INSERT INTO courses (name, description, tutor_id, student_id) VALUES
 ('Math', 'Math Course', 1, 1),
 ('Science', 'Science Course', 2, 2);
 
+-- Inserting example course enrollment values to use in code
+INSERT INTO course_enrollments (course_id, student_id) VALUES
+(1, 1),
+(2, 2);
+
 -- Inserting example assignments values to use in code
-INSERT INTO assignments (course_id, name, description, due_date) VALUES
-(1, 'Advanced Topology', 'Math Assignments', '2025-05-31 23:59:59'),
-(2, 'Theory Of Quantum Tunneling', 'Science Assignment', '2025-04-30 23:59:59');
+INSERT INTO assignments (course_id, tutor_id, student_id, name, description, due_date) VALUES
+(1, 1, 1, 'Advanced Topology', 'Math Assignments', '2025-05-31 23:59:59'),
+(2, 2, 2, 'Theory Of Quantum Tunneling', 'Science Assignment', '2025-04-30 23:59:59');
 
 -- Inserting example calendar events values to use in code
 INSERT INTO calendar (course_id, event_name, event_description, event_date, event_time, duration, tutor_id) VALUES
@@ -201,14 +219,14 @@ INSERT INTO calendar (course_id, event_name, event_description, event_date, even
 (2, 'Quantum Tunneling Lecture', 'Quantum Tunneling Lecture', '2025-01-31', '10:00:00', 60, 2);
 
 -- Inserting example questions into quizzes values to use in code
-INSERT INTO quizzes (course_id, tutor_id, quiz_name, quiz_description, quiz_questions_number, quiz_questions, quiz_question_wrong_answers, quiz_question_correct_answers, quiz_date, quiz_time, duration) VALUES
-(1, 1, 'Topology Quiz', 'Topology Quiz', '1', 'What is the definition of a topological space?','A topological pace is a set of functions that define the spaces between atoms', 'A topological space is a set with a collection of open sets satisfying certain properties.', '2025-01-31', '10:00:00', 60),
-(2, 2, 'Quantum Tunneling Quiz', 'Quantum Tunneling Quiz', '1', 'What is the definition of quantum tunneling?','Quantum Tunneling is the process of splitting atoms', 'Quantum tunneling is a quantum mechanical phenomenon where a particle tunnels through a barrier that it classically cannot surmount.', '2025-01-31', '10:00:00', 60);
+INSERT INTO quizzes (course_id, tutor_id, student_id, quiz_name, quiz_description, quiz_questions_number, quiz_questions, quiz_question_wrong_answers, quiz_question_correct_answers, quiz_date, quiz_time, duration) VALUES
+(1, 1, 1, 'Topology Quiz', 'Topology Quiz', '1', 'What is the definition of a topological space?','A topological pace is a set of functions that define the spaces between atoms', 'A topological space is a set with a collection of open sets satisfying certain properties.', '2025-01-31', '10:00:00', 60),
+(2, 2, 1, 'Quantum Tunneling Quiz', 'Quantum Tunneling Quiz', '1', 'What is the definition of quantum tunneling?','Quantum Tunneling is the process of splitting atoms', 'Quantum tunneling is a quantum mechanical phenomenon where a particle tunnels through a barrier that it classically cannot surmount.', '2025-01-31', '10:00:00', 60);
 
 -- Inserting example classes values to use in code
-INSERT INTO classes (course_id, tutor_id, class_name, class_description, class_date, class_time, duration) VALUES
-(1, 1, 'Topology Lecture', 'Topology Lecture', '2025-01-31', '10:00:00', 60),
-(2, 2, 'Quantum Tunneling Lecture', 'Quantum Tunneling Lecture', '2025-01-31', '10:00:00', 60);
+INSERT INTO classes (course_id, tutor_id, student_id, class_name, class_description, class_date, class_time, duration) VALUES
+(1, 1, 1, 'Topology Lecture', 'Topology Lecture', '2025-01-31', '10:00:00', 60),
+(2, 2, 2, 'Quantum Tunneling Lecture', 'Quantum Tunneling Lecture', '2025-01-31', '10:00:00', 60);
 
 -- Inserting example resources values to use in code
 INSERT INTO resources (course_id, tutor_id, file_name, file_path) VALUES

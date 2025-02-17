@@ -18,7 +18,7 @@ function togglePasswordVisibility() {
     }
 }
 
-
+// determine the dashboard URL based on the user role
 function getDashboardURL() {
     switch ($role) {
         case 'admin':
@@ -33,7 +33,7 @@ function getDashboardURL() {
 }
 
 
-
+// navigation dropdown toggle
 function toggleDropdown() {
     document.getElementById("nav-content-dropdown").classList.toggle("show");
 }
@@ -48,7 +48,7 @@ window.onclick = function (event) {
         }
     }
 }
-
+// navigation handle dropdown
 function handleDropdown() {
     document.addEventListener("DOMContentLoaded", function () {
         const dropdownButton = document.querySelector(".dropdown-button");
@@ -70,6 +70,7 @@ function handleDropdown() {
         }
     }
 }
+// handle logout button
 document.addEventListener("DOMContentLoaded", function () {
     const logoutButton = document.getElementById("logout-button");
 
@@ -82,3 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     handleDropdown();
 });
+
+
+

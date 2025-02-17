@@ -22,6 +22,8 @@ try {
 $name = $user['name'];
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,31 +31,30 @@ $name = $user['name'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor Dashboard</title>
-    <link rel="stylesheet" href="/acetraining/assets/css/tutor.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <div class="tutor_dash_head">
-        <h1>Tutor Dashboard</h1>
-        <h2>Welcome To your dashboard, <?php echo htmlspecialchars($name) ?> </h2>
+    <div class="student_dash_head">
+        <h1>Student Dashboard</h1>
+        <h2>Welcome to your dashboard, <?php echo htmlspecialchars($name) ?></h2>
     </div>
-    <div class="tutor_description">#
-        <h3>Information</h3>
-        <p>Here you can view your information</p>
+    <div class="student_description">
+        <h3>information</h3>
+        <p>Here you can view your information.</p>
         <p2>Within your dashboard you can:</p2>
         <div class="information_table">
             <ul>
-                <li>Create New Assignments</li>
-                <li>Create New Quizzes</li>
-                <li>Create New Blocks for Course Information</li>
-                <li>Adding and Deleting Information</li>
-                <li>Adding and Removing Students from Courses</li>
-                <li>Check Participants of a Specific Course</li>
+                <li>Download Resources</li>
+                <li>View your course information</li>
+                <li>Submit assignments and quizzes</li>
+                <li>Check your timetable</li>
+                <li>Check your calendar</li>
+                <li>Check your profile</li>
             </ul>
         </div>
     </div>
+
 </body>
 
 </html>
-<?php include __DIR__ . '/../components/footer.php'; ?>

@@ -34,9 +34,9 @@ try {
         }
     }
 
-    echo "All passwords have been hashed and updated successfully.";
+    //echo "All passwords have been hashed and updated successfully.";
 } catch (PDOException $e) {
-    echo "Database error: " . $e->getMessage();
+    //echo "Database error: " . $e->getMessage();
 }
 exit();
 ?>

@@ -25,6 +25,7 @@ if (!$user) {
     exit();
 }
 
+
 if ($user) {
     try {
         $role = '';
@@ -53,7 +54,38 @@ if ($user) {
         echo "Error: " . $e->getMessage();
         exit();
     }
+
+    switch ($user['role']) {
+        case 'Student':
+            try {
+                $stmt = $pdo->prepare("SELECT c.name FROM courses c JOIN students s ON c.student_id = s.id WHERE s.user_id = :user_id");
+                $stmt->execute(['user_id' => $user_id]);
+                $course = $stmt->fetch(PDO::FETCH_ASSOC);
+                $user['course_name'] = $course['name'] ?? 'No Course Enrolled';
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                exit();
+            }
+            break;
+        case 'Tutor':
+            try {
+                $stmt = $pdo->prepare("SELECT name FROM courses WHERE tutor_id = :tutor_id");
+                $stmt->execute(['tutor_id' => $user_id]);
+                $course = $stmt->fetch(PDO::FETCH_ASSOC);
+                $user['course_name'] = $course['name'] ?? 'No Course Assigned';
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                exit();
+            }
+            break;
+        default:
+            $user['course_name'] = 'N/A';
+            break;
+    }
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,26 +105,26 @@ if ($user) {
     <div class="profile-container">
         <table class="profile-table">
             <tbody class="table-body">
-                <tr=class="table-row">
+                <tr class="table-row">
                     <th class="table-head">Name</th>
                     <td class="table-data"><?php echo htmlspecialchars($user['name']); ?></td>
-                    </tr>
-                    <tr class="table-row">
-                        <th class="table-head">Email</th>
-                        <td class="table-data"><?php echo htmlspecialchars($user['email']); ?></td>
-                    </tr>
-                    <tr class="table-row">
-                        <th class="table-head">Role</th>
-                        <td class="table-data"><?php echo htmlspecialchars($user['role']); ?></td>
-                    </tr>
-                    <tr class="table-row">
-                        <th class="table-head">Coures Enrolled or Teaching</th>
-                        <td class="table-data"><?php echo htmlspecialchars($courses); ?></td>
-                    </tr class="table-row">
-                    <tr>
-                        <th class="table-head">Account Created</th>
-                        <td class="table-data"><?php echo htmlspecialchars($user['created_at']); ?></td>
-                    </tr>
+                </tr>
+                <tr class="table-row">
+                    <th class="table-head">Email</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['email']); ?></td>
+                </tr>
+                <tr class="table-row">
+                    <th class="table-head">Role</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['role']); ?></td>
+                </tr>
+                <tr class="table-row">
+                    <th class="table-head">Course Enrolled or Teaching</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['course_name']); ?></td>
+                </tr class="table-row">
+                <tr>
+                    <th class="table-head">Account Created</th>
+                    <td class="table-data"><?php echo htmlspecialchars($user['created_at']); ?></td>
+                </tr>
             </tbody>
         </table>
     </div>

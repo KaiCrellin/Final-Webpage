@@ -1,10 +1,41 @@
 <?php
 session_start();
+require_once __DIR__ . '/lib/db.php';
 include __DIR__ . '/components/header.php';
+
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 $csrf_token = $_SESSION['csrf_token'];
+try {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT name FROM users WHERE id = :id");
+    $stmt->execute(['id' => $user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    foreach ($users as $user) {
+        $user_id = $user['id'];
+        $plain_password = $user['password'];
+
+        if (password_get_info($plain_password)['algo'] !== 0) {
+            $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
+
+            $update_stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :id");
+            $update_stmt->execute(['password' => $hashed_password, 'id' => $user_id]);
+
+            //echo "Password for user ID $user_id has been hashed and updated.<br>";
+            //echo "Hashed Password: " . htmlspecialchars($hashed_password) . "<br>";
+        } else {
+            //echo "Password for user ID $user_id is already hashed.<br>";
+            //echo "Hashed Password: " . htmlspecialchars($plain_password) . "<br>";
+        }
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    exit();
+}
+
 
 ?>
 

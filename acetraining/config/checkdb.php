@@ -14,12 +14,15 @@ try {
         'tutors',
         'admins',
         'courses',
-        'students_courses'
-        ,
+        'course_enrollments',
+        'classes',
+        'password_resets',
+        'sessions',
+        'assignments',
+        'quizzes',
+        'submissions',
         'calendar',
-        'students_courses',
-        'students_courses',
-        'students_courses'
+        'resources'
     ];
 
     // Check if required tables exist
