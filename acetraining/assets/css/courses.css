@@ -1,0 +1,59 @@
+.course-block {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 60%;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.course-title {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.block-dropdown-button {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.3s ease;
+}
+
+.block-dropdown-button:hover {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.block-dropdown-button.active {
+  transform: rotate(180deg);
+}
+
+.course-content {
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+}
+
+.course-content.hidden {
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.course-content:not(.hidden) {
+  max-height: 500px;
+  margin-top: 10px;
+}
+
+.course-description {
+  font-size: 1em;
+  margin-bottom: 10px;
+}

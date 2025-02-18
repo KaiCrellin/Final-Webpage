@@ -39,6 +39,7 @@ $csrf_token = $_SESSION['csrf_token'];
                     <a class="nav-item" href="/acetraining/pages/profile.php">Profile</a>
                     <a class="nav-item" href="/acetraining/pages/timetable.php">Timetable</a>
                     <a class="nav-item" href="/acetraining/pages/assignments.php">Assignments</a>
+                    <a class="nav-item" href="/acetraining/pages/courses.php">Courses</a>
                     <form action="/acetraining/config/logout.php" method="POST" class="logout-form">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                         <button type="submit" class="nav-item logout-button">Logout</button>

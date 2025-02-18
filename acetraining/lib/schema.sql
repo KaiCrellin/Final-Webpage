@@ -46,6 +46,8 @@ CREATE TABLE IF NOT EXISTS courses (
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
+
+
     -- Table for course_enrollments
 CREATE TABLE IF NOT EXISTS course_enrollments (
     id INT AUTO_INCREMENT PRIMARY KEY,

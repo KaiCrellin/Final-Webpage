@@ -105,8 +105,6 @@ if ($user) {
             break;
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -116,9 +114,11 @@ if ($user) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/acetraining/assets/css/assignments.css">
 </head>
 
 <body>
+    // create button and form to Create Assignments. IF TUTOR.
     <div class="assignments-container">
         <h1>Welcome to your Assignments, Here you can see your Active Assignments</h1>
     </div>
@@ -144,8 +144,7 @@ if ($user) {
             </tbody>
         </table>
     </div>
-
-
+    <script src="/acetraining/assets/js/main.js"></script>
 </body>
 
 </html>
