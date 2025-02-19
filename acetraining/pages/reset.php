@@ -16,6 +16,7 @@ require_once __DIR__ . '/../lib/db.php';
 </head>
 
 <body>
+    <!-- Reset Password -->
     <div class="reset_container">
         <div class="reset">
             <form action="/acetraining/config/reset_pass.php" method="POST" name="reset_pass_form"

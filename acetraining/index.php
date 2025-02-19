@@ -50,6 +50,7 @@ try {
 </head>
 
 <body>
+    <!-- Main Container -->
     <div class="main_home">
         <h1 class="main_home_heading1">Welcome To Our Website, Ace Training</h1>
         <p1 class="main_home_para1">Click log in to begin</p1>

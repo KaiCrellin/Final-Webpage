@@ -1,22 +1,4 @@
 /*Purpose: Main java scripts*/
-function closeModel() {
-    document.getElementById('assignmentmodel').style.display = 'none';
-}
-
-
-function openModel() {
-    document.getElementById('assignmentmodel').style.display = 'block';
-}
-
-function togglePasswordVisibility() {
-    var passwordField = document.getElementById('password');
-    var toggleCheckbox = document.getElementById('togglePassword');
-    if (toggleCheckbox.checked) {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
-}
 
 // determine the dashboard URL based on the user role
 function getDashboardURL() {
@@ -31,21 +13,7 @@ function getDashboardURL() {
             return '';
     }
 }
-// Toggle Create Assignment
-function showCourseCreate() {
-    const showFormButton = document.getElementById('showFormButton');
-    const assignmentForm = document.getElementById('assignmentForm');
 
-    if (showFormButton && assignmentForm) {
-        showFormButton.addEventListener('click', function () {
-            if (assignmentForm.style.display === 'none' || assignmentForm.style.display === '') {
-                assignmentForm.style.display = 'block';
-            } else {
-                assignmentForm.style.display = 'none';
-            }
-        });
-    }
-}
 
 // navigation dropdown toggle
 function toggleDropdown() {
@@ -104,35 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     showCourseCreate();
 });
 
-//toggle course blocks
-function toggleCourseContent(button) {
-    const courseBlock = button.closest('.course-block');
-    const content = courseBlock.querySelector('.course-content');
-    const isHidden = content.classList.contains('hidden');
 
-
-    content.classList.toggle('hidden');
-
-
-    button.classList.toggle('active');
-
-
-    if (!isHidden) return;
-
-    const allContents = document.querySelectorAll('.course-content:not(.hidden)');
-    const allButtons = document.querySelectorAll('.block-dropdown-button.active');
-
-    allContents.forEach(item => {
-        if (item !== content) {
-            item.classList.add('hidden');
-        }
-    });
-
-    allButtons.forEach(btn => {
-        if (btn !== button) {
-            btn.classList.remove('active');
-        }
-    });
-}
 
 
