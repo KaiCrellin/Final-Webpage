@@ -10,19 +10,13 @@ try {
     // List of required tables
     $requiredTables = [
         'users',
-        'students',
         'tutors',
-        'admins',
-        'courses',
-        'course_enrollments',
-        'classes',
-        'password_resets',
-        'sessions',
-        'assignments',
+        'students',
         'quizzes',
-        'submissions',
-        'calendar',
-        'resources'
+        'course_enrollments',
+        'courses',
+        'classes',
+        'assignments'
     ];
 
     // Check if required tables exist

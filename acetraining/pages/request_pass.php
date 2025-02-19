@@ -15,6 +15,7 @@ $csrf_token = $_SESSION['csrf_token'] || $_SESSION['csrf_token'] ?? bin2hex(rand
     <link rel="stylesheet" href="/acetraining/assets/css/forgotten_pass.css">
 </head>
 
+
 <body>
     <div class="forgotten-container">
         <form action="/acetraining/config/request.php" id="password-reset-form" method="POST">

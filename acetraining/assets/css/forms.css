@@ -1,0 +1,131 @@
+.edit-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: white;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 120px;
+}
+
+select.form-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.form-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.required::after {
+  content: "*";
+  color: #dc3545;
+  margin-left: 0.25rem;
+}
+
+/* Date and time inputs specific styling */
+input[type="date"].form-input,
+input[type="time"].form-input,
+input[type="datetime-local"].form-input {
+  min-height: 38px;
+}
+
+/* Number input specific styling */
+input[type="number"].form-input {
+  appearance: textfield;
+}
+
+input[type="number"].form-input::-webkit-outer-spin-button,
+input[type="number"].form-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.student-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.student-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.student-item:last-child {
+  border-bottom: none;
+}
+
+.student-item label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 0.5rem;
+}
+
+.enrollment-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .edit-form {
+    padding: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-input {
+    padding: 0.625rem;
+  }
+}

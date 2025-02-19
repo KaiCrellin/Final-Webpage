@@ -1,11 +1,18 @@
 <?php
 session_start();
+
+// Generate CSRF token if not exists
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Clear any existing user session
+if (isset($_SESSION['user_id'])) {
+    session_destroy();
+    session_start();
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 include __DIR__ . '/../components/header.php';
-require_once __DIR__ . '/../lib/db.php';
-$csrf_token = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $csrf_token;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,76 +20,103 @@ $_SESSION['csrf_token'] = $csrf_token;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - Ace Training</title>
+    <link rel="stylesheet" href="/acetraining/assets/css/login.css">
+    <style>
+        .test-accounts {
+            max-width: 400px;
+            margin: 2rem auto;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .test-accounts table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .test-accounts th,
+        .test-accounts td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .test-accounts h3 {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="showlogin-container">
-        <form action="/acetraining/config/login.php" method="POST" class="showlogin-form">
-            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" method="POST">
-            <label for="email" class="label-input">Email:</label>
-            <input type="text" id="email" name="email" placeholder="Please enter your Email" required>
-            <label for="password" class="label-input">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Please enter your password" required>
-            <label for="togglePassword" class="label-input">Show Password</label>
-            <input type="checkbox" id="togglePassword" onclick="togglePasswordVisibility()">
-            <p><a href="/acetraining/pages/request_pass.php">Forgot Password?</a></p>
-            <button type="submit" class="login-input">Login</button>
+    <!-- Login -->
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="login-title">Login</h1>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="login-error">
+                    <?php echo htmlspecialchars($_GET['error']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <form action="/acetraining/config/login.php" method="POST" class="login-form">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required
+                    value="<?php echo htmlspecialchars($_GET['email'] ?? ''); ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
         </form>
+
+        <div class="forgot-password">
+            <a href="/acetraining/pages/request_pass.php">Forgot your password?</a>
+        </div>
     </div>
-    <div class="sample_information">
-        <?php if (isset($_GET['error'])): ?>
-            <p class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></p>
-        <?php endif; ?>
-
-        <h2 class="information-user"></h2>
-        <table class="table-information">
-            <tr>
-                <th><?php echo $csrf_token; ?></th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-            <?php echo $csrf_token; ?>
-            <?php
-            try {
-                $stmt = $pdo->query("SELECT id, name, email, password FROM users");
-                while ($row = $stmt->fetch()) {
-                    $user_id = $row['id'];
-                    $role = '';
-
-                    $stmt2 = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE user_id = :user_id");
-                    $stmt2->execute(['user_id' => $user_id]);
-                    if ($stmt2->fetchColumn() > 0) {
-                        $role = 'Admin';
-                    }
-
-                    $stmt2 = $pdo->prepare("SELECT COUNT(*) FROM tutors WHERE user_id = :user_id");
-                    $stmt2->execute(['user_id' => $user_id]);
-                    if ($stmt2->fetchColumn() > 0) {
-                        $role = 'Tutor';
-                    }
-
-                    $stmt2 = $pdo->prepare("SELECT COUNT(*) FROM students WHERE user_id = :user_id");
-                    $stmt2->execute(['user_id' => $user_id]);
-                    if ($stmt2->fetchColumn() > 0) {
-                        $role = 'Student';
-                    }
-
-                    echo "</tr>";
-                    echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($role) . "</td>";
-                    echo "</tr>";
-                }
-            } catch (PDOException $e) {
-                echo "<tr><td colspan='4'>Database error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
-            }
-            ?>
+    <!-- Test Accounts -->
+    <div class="test-accounts">
+        <h3>Test Accounts</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tutor</td>
+                    <td>john@test.com</td>
+                    <td>test123</td>
+                </tr>
+                <tr>
+                    <td>Tutor</td>
+                    <td>jane@test.com</td>
+                    <td>test123</td>
+                </tr>
+                <tr>
+                    <td>Student</td>
+                    <td>mike@test.com</td>
+                    <td>test123</td>
+                </tr>
+                <tr>
+                    <td>Student</td>
+                    <td>sarah@test.com</td>
+                    <td>test123</td>
+                </tr>
+            </tbody>
         </table>
-    </div>
     </div>
 
     <script src="../acetraining/assets/js/main.js"></script>

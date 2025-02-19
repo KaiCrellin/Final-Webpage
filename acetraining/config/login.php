@@ -2,85 +2,82 @@
 <?php
 session_start();
 require_once __DIR__ . '/../lib/db.php';
-$csrf_token = $_SESSION['csrf_token'];
 
+//  CSRF check
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die('CSRF token validation failed');
-    }
+    try {
+        $email = trim($_POST['email']);
+        $submitted_password = $_POST['password'];
 
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+        // Basic validation
+        if (empty($email) || empty($submitted_password)) {
+            throw new Exception('Please enter both email and password');
+        }
 
-    if (empty($email) || empty($password)) {
-        $error = 'Email and password are required.';
-        header('Location: /acetraining/pages/showlogin.php?error=' . urlencode($error));
-        exit();
-    } else {
-        try {
-            global $pdo;
+        // Find user by email
+        $stmt = $pdo->prepare("
+            SELECT 
+                u.id,
+                u.name,
+                u.email,
+                u.password,
+                CASE 
+                    WHEN t.id IS NOT NULL THEN 'tutor'
+                    WHEN s.id IS NOT NULL THEN 'student'
+                END as role
+            FROM users u
+            LEFT JOIN tutors t ON u.id = t.user_id
+            LEFT JOIN students s ON u.id = s.user_id
+            WHERE u.email = ?
+        ");
 
-            $stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = :email");
-            $stmt->execute(['email' => $email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $user_id = $user['id'];
+        // Debug
+        error_log("Login attempt for: " . $email);
+        error_log("User found: " . ($user ? "Yes" : "No"));
 
+        // Check credentials
+        if ($user && password_verify($submitted_password, $user['password'])) {
+            // Update last_logged_in timestamp
+            $update_stmt = $pdo->prepare("
+                UPDATE users 
+                SET last_logged_in = CURRENT_TIMESTAMP 
+                WHERE id = ?
+            ");
+            $update_stmt->execute([$user['id']]);
 
-                $role = '';
+            // Set session data
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['email'] = $user['email'];
 
-                $stmt = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE user_id = :user_id");
-                $stmt->execute(['user_id' => $user_id]);
-                if ($stmt->fetchColumn() > 0) {
-                    $role = 'admin';
-                }
-
-                $stmt = $pdo->prepare("SELECT COUNT(*) FROM tutors WHERE user_id = :user_id");
-                $stmt->execute(['user_id' => $user_id]);
-                if ($stmt->fetchColumn() > 0) {
-                    $role = 'tutor';
-                }
-
-                $stmt = $pdo->prepare("SELECT COUNT(*) FROM students WHERE user_id = :user_id");
-                $stmt->execute(['user_id' => $user_id]);
-                if ($stmt->fetchColumn() > 0) {
-                    $role = 'student';
-                }
-
-                if ($role) {
-                    $_SESSION['role'] = $role;
-
-                    if ($role === 'admin') {
-                        header('Location: /acetraining/pages/admin_dashboard.php');
-                        exit();
-                    } elseif ($role === 'tutor') {
-                        header('Location: /acetraining/pages/tutor_dashboard.php');
-                        exit();
-                    } elseif ($role === 'student') {
-                        header('Location: /acetraining/pages/student_dashboard.php');
-                        exit();
-                    }
-                } else {
-                    $error = 'Invalid user role.';
-                    header('Location: /acetraining/pages/showlogin.php?error=' . urlencode($error));
-                    exit();
-                }
+            // Redirect based on role
+            if ($user['role'] === 'tutor') {
+                header('Location: /acetraining/pages/tutor_dashboard.php');
             } else {
-                $error = 'Invalid email or password.';
-                header('Location: /acetraining/pages/showlogin.php?error=' . urlencode($error));
-                exit();
+                header('Location: /acetraining/pages/student_dashboard.php');
             }
-        } catch (PDOException $e) {
-            $error = 'Database error: ' . $e->getMessage();
-            header('Location: /acetraining/pages/showlogin.php?error=' . urlencode($error));
             exit();
         }
+
+        // Invalid login
+        throw new Exception('Invalid email or password');
+
+    } catch (Exception $e) {
+        error_log("Login error: " . $e->getMessage());
+        header('Location: /acetraining/pages/showlogin.php?error=' . urlencode($e->getMessage()));
+        exit();
     }
-} else {
-    header('Location: /acetraining/pages/showlogin.php');
-    exit();
 }
+
+// If not POST or failed, redirect to login
+header('Location: /acetraining/pages/showlogin.php');
+exit();
 ?>

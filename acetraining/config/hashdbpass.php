@@ -1,4 +1,4 @@
-<!--Purpose: Check -->
+<!--Purpose: Check db passes are hashed -->
 <?php
 
 ini_set('display_errors', 1);
