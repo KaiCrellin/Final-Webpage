@@ -1,5 +1,3 @@
-// ...existing code...
-
 <div class="dashboard-card">
     <h2 class="card-title">Quiz Information</h2>
     <div class="detail-row">

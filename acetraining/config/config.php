@@ -1,6 +1,6 @@
 <!--Purpose: Config file to define db credentials from the .env (environment) file-->
 <?php
-require_once __DIR__ . '/../config/env.php';
+require_once __DIR__ . '/../lib/env.php';
 
 loadenv(__DIR__ . '/../.env');
 
