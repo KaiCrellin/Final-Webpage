@@ -39,25 +39,3 @@ footer {
   color: white;
   font-size: large;
 }
-
-.footer_links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  padding: 0;
-}
-
-.footer_links a {
-  display: inline;
-}
-
-.footer_links a li {
-  text-decoration: none;
-  font-size: large;
-  color: white;
-  margin-right: 35px;
-}
-
-.footer-links li:hover {
-  text-decoration: underline;
-}
