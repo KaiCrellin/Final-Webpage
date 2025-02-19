@@ -7,7 +7,7 @@ to get the website to run successfully on your system.
 
 2 download the zip file and extract it to your desktop.
 
-3 open the extracted file from the github zip  and drag the whole file "acetraining" into the "E:\UniServerZ\www\ directory within UniServerZ 
+3 open the extracted file from the github zip  and drag the whole file "acetraining" into the "E:\UniServerZ\www\ directory within UniServer. when located in the respective file directoy enter ace training and drag the .env file into the acetrining file directory.
 
 4 open UniZerverZ and start both my sql and apache and then click view www and phpmyadmin.
 
@@ -15,10 +15,12 @@ to get the website to run successfully on your system.
 
 6 load the webpage by opening it from the unizerverz serverpage. when the website loads the index.php should show. but before all logic can these commands but be ran i the url
 
-7 http://localhost/acetraining/config/checkdb.php
+7 /localhost/acetraining/config/checkdb.php
 
-8 http://localhost/acetraining/config/hashdbpass.php
+8 /localhost/acetraining/config/hashdbpass.php
 
-9 after these have been ran and db tables are present and exisitng passwords are hashed the website should work as intended.
+9 after these have been ran redirect to the main website page by using the directory
+/localhost/acetraining/
+and db tables are present and exisitng passwords are hashed the website should work as intended.
 
 
