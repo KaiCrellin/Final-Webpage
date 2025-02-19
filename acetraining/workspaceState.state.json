@@ -1,0 +1,45 @@
+{
+  "workspaceFoldersFilePaths": [
+    "e:\\UniServerZ\\www\\acetraining/"
+  ],
+  "symbols": [],
+  "activeFileDiagnostics": [],
+  "activeTextEditor": {
+    "selections": [
+      {
+        "anchor": {
+          "line": 5,
+          "character": 38
+        },
+        "active": {
+          "line": 5,
+          "character": 38
+        },
+        "isReversed": true
+      }
+    ],
+    "documentFilePath": "e:\\UniServerZ\\www\\acetraining\\index.php",
+    "visibleRanges": [
+      {
+        "start": {
+          "line": 0,
+          "character": 0
+        },
+        "end": {
+          "line": 47,
+          "character": 31
+        }
+      }
+    ],
+    "languageId": "php"
+  },
+  "debugConsoleOutput": "",
+  "terminalBuffer": "",
+  "terminalSelection": "",
+  "terminalShellType": "powershell",
+  "repoContexts": [],
+  "notebookDocumentFilePaths": [],
+  "textDocumentFilePaths": [
+    "index.php"
+  ]
+}
