@@ -16,14 +16,6 @@
             </h1>
             <p class="ace_training">&copy; Ace Training 2025</p>
         </div>
-        <ul class="footer_links">
-            <a href="#terms">
-                <li class="prvacy">Terms Of Service</li>
-            </a>
-            <a class="terms" href="#privacy">
-                <li>Privacy Policy</li>
-            </a>
-        </ul>
     </footer>
 </body>
 
