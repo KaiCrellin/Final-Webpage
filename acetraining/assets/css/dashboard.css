@@ -1,7 +1,9 @@
 .dashboard-container {
-  max-width: 1200px;
+  width: 95%;
+  max-width: var(--max-width-xl);
+  min-height: var(--main-content-min-height);
   margin: 2rem auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .dashboard-header {
@@ -28,6 +30,7 @@
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .dashboard-card {
@@ -36,6 +39,11 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem; /* Add bottom margin to each card */
+  width: 100%;
+  height: fit-content;
+  max-width: var(--max-width-lg);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card-title {
@@ -68,6 +76,11 @@
   margin-top: 1.5rem; /* Increased margin */
   border-spacing: 0; /* Reset spacing */
   margin-bottom: 1.5rem; /* Add bottom margin to tables */
+  min-width: 100%;
+  overflow-x: auto;
+  max-width: var(--max-width-lg);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dashboard-table th,
@@ -302,5 +315,15 @@ select.form-input {
   .dashboard-table th,
   .dashboard-table td {
     padding: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .dashboard-container {
+    width: 90%;
+  }
+
+  .dashboard-grid {
+    gap: 2.5rem;
   }
 }

@@ -46,6 +46,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ace Training</title>
+    <link rel="stylesheet" href="/acetraining/assets/css/global.css">
     <link rel="stylesheet" href="/acetraining/assets/css/index.css">
 </head>
 
@@ -59,9 +60,8 @@ try {
         <h2 class="main_home_heading2">Information about the website</h2>
         <p2 class="main_home_parra2">This website is a University Assignment, produced to handle
             course information for students and tutors. You can check
-            course informationa and assignment deadlines, log in, log out,
-            download and upload files within the website an tutors can do all the same
-            while having certain privilges the student wont.</p2>
+            course informationa and assignment deadlines, log in, log out and tutors can add new
+            assignments, quzzies and course blocks which will be displayed to relevant students</p2>
     </div>
     <script src="/acetraining/assets/js/main.js"></script>
 </body>

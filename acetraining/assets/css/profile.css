@@ -1,10 +1,16 @@
 .profile-container {
-  max-width: 900px;
+  width: 90%;
+  max-width: var(--max-width-lg);
+  max-width: 800px;
+  width: 85%;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
 .profile-header {
+  max-width: var(--max-width-md);
+  margin-left: auto;
+  margin-right: auto;
   background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
@@ -40,6 +46,9 @@
 }
 
 .profile-stats {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
@@ -118,5 +127,12 @@
 
   .profile-actions .dashboard-button {
     width: 100%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .profile-stats {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: var(--max-width-lg);
   }
 }

@@ -21,6 +21,7 @@ include __DIR__ . '/../components/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Ace Training</title>
+    <link rel="stylesheet" href="/acetraining/assets/css/global.css">
     <link rel="stylesheet" href="/acetraining/assets/css/login.css">
     <style>
         .test-accounts {

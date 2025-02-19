@@ -82,6 +82,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Course - <?php echo htmlspecialchars($course['name'] ?? ''); ?></title>
+    <link rel="stylesheet" href="/acetraining/assets/css/global.css">
     <link rel="stylesheet" href="/acetraining/assets/css/dashboard.css">
     <link rel="stylesheet" href="/acetraining/assets/css/forms.css">
 </head>

@@ -68,6 +68,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timetable - Ace Training</title>
+    <link rel="stylesheet" href="/acetraining/assets/css/global.css">
     <link rel="stylesheet" href="/acetraining/assets/css/dashboard.css">
     <style>
         .timetable-grid {

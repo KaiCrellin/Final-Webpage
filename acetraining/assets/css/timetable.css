@@ -1,5 +1,6 @@
 .timetable-container {
-  max-width: 1200px;
+  max-width: var(--max-width-xl);
+  width: 90%;
   margin: 2rem auto;
   padding: 0 1rem;
 }
@@ -57,4 +58,15 @@
   border-radius: 4px;
   color: #666;
   font-family: monospace;
+}
+
+@media (min-width: 1920px) {
+  .timetable-container {
+    width: 85%;
+  }
+
+  .timetable-table th,
+  .timetable-table td {
+    padding: 1.5rem;
+  }
 }
